@@ -52,4 +52,21 @@ Batch.route('expireaftermonth', (req, res, next) => {
     })
 })
 
+Batch.route('summary', (req, res, next) => {
+    Batch.aggregate([
+        {$group : {
+            _id: null,
+            expired: {$count:{"$outputDate":{$gt: daysPlusDate(Date.now(),30)}}}
+        }}
+    , (error, result) => {
+        if(error) {
+            res.status(500).json({errors: [error]})
+        } else {
+            res.json({result})
+        }   
+    }])
+})
+
+
+
 module.exports = Batch
