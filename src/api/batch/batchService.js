@@ -22,8 +22,7 @@ Batch.route('count', (req, res, next) => {
 })
 
 Batch.route('expired', (req, res, next) => {
-    Batch.count( {$and: [{outputDate:{$lt: Date.now()}}, {user_email:{$eq: req.body.user_email}}]}
-         
+    Batch.count( {outputDate:{$lt: Date.now()}}         
     , (error, result) => {
         if(error) {
             res.status(500).json({errors: [error]})
