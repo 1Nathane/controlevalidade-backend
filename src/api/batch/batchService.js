@@ -37,7 +37,7 @@ Batch.route('expiremonth', (req, res, next) => {
         if(error) {
             res.status(500).json({errors: [error]})
         } else {
-            res.json({result})
+            res.json({expiremonth: result})
         }   
     })
 })
@@ -47,7 +47,7 @@ Batch.route('expireaftermonth', (req, res, next) => {
         if(error) {
             res.status(500).json({errors: [error]})
         } else {
-            res.json({result})
+            res.json({expireaftermonth: result})
         }   
     })
 })
