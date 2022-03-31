@@ -3,7 +3,7 @@ const mongoose = restful.mongoose
 
 
 const providerSchema = new mongoose.Schema({
-    name: { type: String, required: true },
+    name: { type: String, required: [true, 'O campo Nome é obrigatório!'] },
     user_email: {type: String, required: true}
 })
 
