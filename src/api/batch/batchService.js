@@ -27,7 +27,7 @@ Batch.route('expired', (req, res, next) => {
         if(error) {
             res.status(500).json({errors: [error]})
         } else {         
-            res.json(result)
+            res.json({expired: result})
         }   
     })
 })
