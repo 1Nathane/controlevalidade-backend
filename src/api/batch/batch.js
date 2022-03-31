@@ -4,6 +4,7 @@ const mongoose = restful.mongoose
 
 const batchSchema = new mongoose.Schema({
     name: { type: String, required: [true, 'O campo Nome é obrigatório'] },
+    user_email: { type: String, required: true },
     user_id: [{type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }],
     product_id: [{type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true}],
     provider_id: [{type: mongoose.Schema.Types.ObjectId, ref: 'Provider', required: true }],
