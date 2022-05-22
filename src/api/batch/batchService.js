@@ -118,7 +118,7 @@ Batch.route('outputdateyear', (req, res, next) => {
             }
         },{
             $project: {
-                _id: 0,
+                _id: "$_id.user_email",
                year: "$_id.year",
                month: "$_id.month",
                user_email: "$_id.user_email",
