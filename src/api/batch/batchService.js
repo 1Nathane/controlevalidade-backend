@@ -112,10 +112,19 @@ Batch.route('outputdateyear', (req, res, next) => {
               _id: {
                 year: {$year: "$outputDate"},
                 month: {$month: '$outputDate'},
+                user_email: "$user_email",
               },
               total: {$sum: 1}
             }
-          }
+        },{
+            $project: {
+                _id: 0,
+               year: "$_id.year",
+               month: "$_id.month",
+               user_email: "$_id.user_email",
+               total: "$total" 
+            }
+        }
 
 
 
