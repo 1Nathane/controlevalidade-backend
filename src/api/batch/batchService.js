@@ -99,6 +99,37 @@ Batch.route('summary', (req, res, next) => {
         })
 })
 
+Batch.route('outputdateyear', (req, res, next) => {
+
+    Batch.aggregate([
+        {
+            $match:
+            {
+               status: 'ABERTO' 
+            }
+        },{
+            $group: {
+              _id: {
+                year: {$year: "$outputDate"},
+                month: {$month: '$outputDate'},
+              },
+              total: {$sum: 1}
+            }
+          }
+
+
+
+    ])
+
+        .exec((error, result) => {
+            if (error) {
+                res.status(500).json({ errors: [error] })
+            } else {
+                res.json( result )
+            }
+        })
+})
+
 
 
 module.exports = Batch
