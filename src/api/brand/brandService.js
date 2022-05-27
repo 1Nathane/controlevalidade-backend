@@ -15,14 +15,42 @@ Brand.route('list', (req, res, next) => {
     })
 })
 
+// Brand.route('count', (req, res, next) => {
+//     Brand.count((error, value) => {
+//         if(error) {
+//             res.status(500).json({errors: [error]})
+//         } else {
+//             res.json({value})
+//         }
+//     })
+// })
+
 Brand.route('count', (req, res, next) => {
-    Brand.count((error, value) => {
-        if(error) {
-            res.status(500).json({errors: [error]})
-        } else {
-            res.json({value})
+
+    Batch.aggregate([
+        {
+            $match:
+            {
+                user_email: req.headers.email 
+            }
+        },{
+            $project: {
+                _id: "$_id.user_email",
+               total: { $sum: 1 }
+            }
         }
-    })
+
+
+
+    ])
+
+        .exec((error, result) => {
+            if (error) {
+                res.status(500).json({ errors: [error] })
+            } else {
+                res.json( result )
+            }
+        })
 })
 
 module.exports = Brand
