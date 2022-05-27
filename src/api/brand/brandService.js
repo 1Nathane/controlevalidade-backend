@@ -29,14 +29,16 @@ Brand.route('count', (req, res, next) => {
 
     Brand.aggregate([
         {
-            $match:
+            $group:
             {
-                user_email: req.headers.email 
+                user_email: "$user_email", 
+                total: { $sum: 1 }
             }
         },{
             $project: {
                 _id: 1,
-               total: { $sum: 1 }
+                user_email: "$user_email",
+                sum: "$total"
             }
         }
 
