@@ -31,7 +31,7 @@ Brand.route('count', (req, res, next) => {
         {
             $match:
             {
-                user_email: req.headers.email 
+                user_email: '_teste@teste.com' 
             }
         },{
             $project: {
