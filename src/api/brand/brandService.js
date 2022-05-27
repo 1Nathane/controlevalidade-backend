@@ -28,20 +28,17 @@ Brand.route('list', (req, res, next) => {
 Brand.route('count', (req, res, next) => {
 
     Batch.aggregate([
-        // {
-        //     $match:
-        //     {
-        //         user_email: req.headers.email 
-        //     }
-        // },
         {
+            $match:
+            {
+                user_email: req.headers.email 
+            }
+        },{
             $project: {
-                _id: "$_id.user_email",
+                _id: 1,
                total: { $sum: 1 }
             }
         }
-
-
 
     ])
 
